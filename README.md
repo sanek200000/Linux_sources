@@ -5,5 +5,5 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/sanek200000/Linux_sources/
 ```
 ## Заменяем файл настроек conky
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/sanek200000/Linux_sources/main/manjaro/scripts/conky_green.sh)"
+sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/sanek200000/Linux_sources/main/manjaro/scripts/conky_green.sh)"
 ```
