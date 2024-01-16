@@ -5,7 +5,7 @@
 if command -v pkg; then
 	echo "I'm in FreeBSD"
 	installer='pkg install -y'
-	programms='zsh ranger nano bat duf tldr btop curl lsd'
+	programms='zsh ranger nano bat duf tldr btop lsd'
 elif command -v apt-get; then
 	echo "I'm in Debian"
 	installer='apt-get install -y'
@@ -23,7 +23,14 @@ fi
 ${installer} sudo
 
 # Install some programms
-sudo ${installer} ${programms}
+sudo ${installer} zsh
+sudo ${installer} ranger
+sudo ${installer} nano
+sudo ${installer} bat
+sudo ${installer} duf
+sudo ${installer} tldr
+sudo ${installer} btop
+sudo ${installer} lsd
 ranger --copy-config=all
 
 # Install font for zsh
