@@ -62,7 +62,7 @@ with open(filename, 'w') as f:
 # echo aliaces to ~/.zshrc
 echo "alias ll='lsd -lAF --group-directories-first'" >> ~/.zshrc
 echo "alias h='history 50'" >> ~/.zshrc
-echo "alias ee='nano'" >> ~/.zshrc
+echo "alias ee='nano -c'" >> ~/.zshrc
 echo "alias df='duf'" >> ~/.zshrc
 echo "alias man='tldr'" >> ~/.zshrc
 echo "alias top='btop'" >> ~/.zshrc
