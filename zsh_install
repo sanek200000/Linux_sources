@@ -40,24 +40,24 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 # Python code
 python3 -c "
-filename = '~/.zshrc'
-old_text='ZSH_THEME='
-new_text='ZSH_THEME="powerlevel10k/powerlevel10k"'
+import os
 
-with open(filename, 'r+') as f:
-    content = f.read()
-    f.seek(0)
-    f.write(content.replace(old_text, f'#{old_text}\n{new_text}'))"
+filename = os.path.expanduser('~/.zshrc')
+new_theme='ZSH_THEME=\"powerlevel10k/powerlevel10k\"'
+new_plugins='plugins=( git zsh-syntax-highlighting zsh-autosuggestions )'
 
-python3 -c "
-filename = '~/.zshrc'
-old_text='plugins=('
-new_text='plugins=( git zsh-syntax-highlighting zsh-autosuggestions )'
+with open(filename, 'r') as f:
+    lines = f.readlines()
 
-with open(filename, 'r+') as f:
-    content = f.read()
-    f.seek(0)
-    f.write(content.replace(old_text, f'#{old_text}\n{new_text}'))"
+for i, line in enumerate(lines):
+    if line.startswith('ZSH_THEME='):
+        lines[i] = f'# {line.strip()}\n{new_theme}\n'
+    if line.startswith('plugins=('):
+        lines[i] = f'# {line.strip()}\n{new_plugins}\n'
+
+with open(filename, 'w') as f:
+    f.writelines(lines)
+"
 
 # echo aliaces to ~/.zshrc
 echo "alias ll='lsd -lAF --group-directories-first'" >> ~/.zshrc
@@ -68,7 +68,7 @@ echo "alias man='tldr'" >> ~/.zshrc
 echo "alias top='btop'" >> ~/.zshrc
 echo "alias rr='ranger'" >> ~/.zshrc
 
-# reboot ZSH
-source .zshrc
+# make ZSH grate again
+chsh -s /usr/bin/zsh
 
 echo 'End script'
