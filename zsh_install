@@ -1,0 +1,81 @@
+#!/bin/sh
+#
+# Script for install ZSH
+
+if command -v pkg; then
+	echo "I'm in FreeBSD"
+	installer='pkg install -y'
+	programms='zsh ranger nano bat duf tldr btop curl lsd'
+elif command -v apt-get; then
+	echo "I'm in Debian"
+	installer='apt-get install -y'
+	programms='zsh ranger nano bat duf tldr btop curl'
+elif command -v pacman; then
+	echo "I'm in ArchLinux"
+	installer='pacman -Sy'
+	programms='zsh ranger nano bat duf tldr btop curl lsd'
+else
+	echo "Unknown system"
+	exit 1
+fi
+
+
+# Install some programms
+sudo ${installer} ${programms}
+ranger --copy-config=all
+
+# Install font for zsh
+# sudo ${installer} fonts-firacode
+
+# Install Oh My Zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# Install PowerLevel10k
+git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh}/themes/powerlevel10k
+
+# Ïîäñâåòêà ñèíòàêñèñà
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# Àâòî äîïîëíåíèå
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# Çàêîììåíòèðîâàòü ñòðîêó è äîáàâèòü íîâóþ ñòðîêó ñðàçó ïîñëå çàêîììåíòèðîâàííîé
+python3 -c "filename = 'test.txt'
+text='parsing=10'
+
+with open(filename, 'r+') as f:
+    content = f.read()
+    f.seek(0)
+    f.write(content.replace(text, f'#{text}\n{text} äîáàâëåíà'))"
+
+# Çàêîììåíòèðîâàòü ñòðîêó è äîáàâèòü íîâóþ ñòðîêó ñðàçó ïîñëå çàêîììåíòèðîâàííîé
+python3 -c "
+filename = '~/.zshrc'
+old_text='ZSH_THEME='
+new_text='ZSH_THEME="powerlevel10k/powerlevel10k"'
+
+with open(filename, 'r+') as f:
+    content = f.read()
+    f.seek(0)
+    f.write(content.replace(old_text, f'#{old_text}\n{new_text}'))"
+
+python3 -c "
+filename = '~/.zshrc'
+old_text='plugins=('
+new_text='plugins=( git zsh-syntax-highlighting zsh-autosuggestions )'
+
+with open(filename, 'r+') as f:
+    content = f.read()
+    f.seek(0)
+    f.write(content.replace(old_text, f'#{old_text}\n{new_text}'))"
+
+# echo aliaces to ~/.zshrc
+echo "alias ll='lsd -lAF --group-directories-first'" >> ~/.zshrc
+echo "alias h='history 50'" >> ~/.zshrc
+echo "alias ee='nano'" >> ~/.zshrc
+echo "alias df='duf'" >> ~/.zshrc
+echo "alias man='tldr'" >> ~/.zshrc
+echo "alias top='btop'" >> ~/.zshrc
+echo "alias rr='ranger'" >> ~/.zshrc
+
+# reboot ZSH
+source .zshrc
