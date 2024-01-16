@@ -73,3 +73,5 @@ chsh -s /usr/bin/zsh
 
 echo 'End script'
 echo 'you can run `p10k configure` to cinfigure your ZSH'
+
+zsh
