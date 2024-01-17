@@ -24,6 +24,7 @@ ${installer} sudo
 
 # Install some programms
 sudo ${installer} zsh
+sudo ${installer} wget
 sudo ${installer} ranger
 sudo ${installer} nano
 sudo ${installer} bat
@@ -42,6 +43,9 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 # Install PowerLevel10k
 git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh}/themes/powerlevel10k
 
+# Install my theme heist
+wget -P ~/.oh-my-zsh/themes 'https://raw.githubusercontent.com/sanek200000/Linux_sources/main/heist.zsh-theme'
+
 # Ïîäñâåòêà ñèíòàêñèñà
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 # Àâòî äîïîëíåíèå
@@ -52,6 +56,7 @@ python3 -c "
 import os
 
 filename = os.path.expanduser('~/.zshrc')
+my_theme='ZSH_THEME=\heist\"'
 new_theme='ZSH_THEME=\"powerlevel10k/powerlevel10k\"'
 new_plugins='plugins=( git zsh-syntax-highlighting zsh-autosuggestions )'
 
@@ -60,7 +65,7 @@ with open(filename, 'r') as f:
 
 for i, line in enumerate(lines):
     if line.startswith('ZSH_THEME='):
-        lines[i] = f'# {line.strip()}\n{new_theme}\n'
+        lines[i] = f'# {line.strip()}\n# {my_theme}\n{new_theme}\n'
     if line.startswith('plugins=('):
         lines[i] = f'# {line.strip()}\n{new_plugins}\n'
 
