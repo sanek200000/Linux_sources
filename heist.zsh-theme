@@ -1,6 +1,6 @@
 # heist.zsh-theme
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
-local user_host="%B%(!.%{$fg[green]%}.%{$fg[green]%})%n@%m%{$reset_color%} "
+local user_host="%B%(!.%{$fg[green]%}.%{$fg[green]%})%n@%m%{$reset_color%}"
 local user_symbol='%{$fg[yellow]%}%(!.>.$.)%{$reset_color%}'
 local current_dir="%B%{$fg[cyan]%}%~%{$reset_color%}"
 local curent_time="%{$fg[yellow]%}%D{%Y-%m-%d %H:%M:%S}%{$reset_color%}"
