@@ -1,11 +1,35 @@
 # heist.zsh-theme
+local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+local user_host="%B%(!.%{$fg[green]%}.%{$fg[green]%})%n@%m%{$reset_color%} "
+local user_symbol='%{$fg[yellow]%}%(!.>.$.)%{$reset_color%}'
+local current_dir="%B%{$fg[cyan]%}%~%{$reset_color%}"
+local curent_time="%{$fg[yellow]%}%D{%Y-%m-%d %H:%M:%S}%{$reset_color%}"
+local razdelitel="%{$fg[white]%} %(!.|.$.) %{$reset_color%}"
 
-PROMPT=' ^u  ^t^`%{$fg_bold[yellow]%}%D{%Y-%m-%d %H:%M:%S} %{$fg[white]%}|%{$reset_color%} %{$fg_bold[green]%}%n@%m %{$fg[white]%}|%{$reset_color%} %{$fg_bold[cyan]%}%~%{$reset_color%} %{$f>
- ^u  ^t^`%{$fg_bold[yellow]%}>%{$reset_color%} '
+local vcs_branch='$(git_prompt_info)$(hg_prompt_info)'
+local rvm_ruby='$(ruby_prompt_info)'
+local venv_prompt='$(virtualenv_prompt_info)'
 
-#RPROMPT='%{$fg_bold[blue]%}>%{$reset_color%} '
+ZSH_THEME_RVM_PROMPT_OPTIONS="i v g"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[white]%}[%{$fg[magenta]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[white]%}]%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[white]%} %{$fg[red]%} ^|^w%{$fg[white]%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[white]%} %{$fg[green]%} ^|^t%{$fg[white]%}"
+PROMPT="╭─${curent_time}${razdelitel}${user_host}${razdelitel}${current_dir}${razdelitel}
+╰─%B${user_symbol}%b "
+RPROMPT="%B${return_code}%b"
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}‹"
+ZSH_THEME_GIT_PROMPT_SUFFIX="› %{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}●%{$fg[yellow]%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[yellow]%}"
+
+ZSH_THEME_HG_PROMPT_PREFIX="$ZSH_THEME_GIT_PROMPT_PREFIX"
+ZSH_THEME_HG_PROMPT_SUFFIX="$ZSH_THEME_GIT_PROMPT_SUFFIX"
+ZSH_THEME_HG_PROMPT_DIRTY="$ZSH_THEME_GIT_PROMPT_DIRTY"
+ZSH_THEME_HG_PROMPT_CLEAN="$ZSH_THEME_GIT_PROMPT_CLEAN"
+
+ZSH_THEME_RUBY_PROMPT_PREFIX="%{$fg[red]%}‹"
+ZSH_THEME_RUBY_PROMPT_SUFFIX="› %{$reset_color%}"
+
+ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="%{$fg[green]%}‹"
+ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="› %{$reset_color%}"
+ZSH_THEME_VIRTUALENV_PREFIX="$ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX"
+ZSH_THEME_VIRTUALENV_SUFFIX="$ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX"
