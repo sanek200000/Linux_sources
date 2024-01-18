@@ -39,24 +39,22 @@ ranger --copy-config=all
 
 # Install Oh My Zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # Install PowerLevel10k
 git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh}/themes/powerlevel10k
 
 # Install my theme heist
-wget -P ~/.oh-my-zsh/themes 'https://raw.githubusercontent.com/sanek200000/Linux_sources/main/heist.zsh-theme'
+wget -P ~/.oh-my-zsh/themes 'https://raw.githubusercontent.com/sanek200000/Linux_sources/main/heist_simple.zsh-theme'
 
-# Ïîäñâåòêà ñèíòàêñèñà
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-# Àâòî äîïîëíåíèå
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # Python code
 python3 -c "
 import os
 
 filename = os.path.expanduser('~/.zshrc')
-my_theme='ZSH_THEME=\"heist\"'
+my_theme='ZSH_THEME=\"heist_simple\"'
 new_theme='ZSH_THEME=\"powerlevel10k/powerlevel10k\"'
 new_plugins='plugins=( git zsh-syntax-highlighting zsh-autosuggestions )'
 
