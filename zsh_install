@@ -1,0 +1,89 @@
+#!/bin/sh
+#
+# Script for install ZSH
+
+if command -v pkg; then
+	echo "I'm in FreeBSD"
+	installer='pkg install -y'
+	programms='zsh ranger nano bat duf tldr btop lsd'
+elif command -v apt-get; then
+	echo "I'm in Debian"
+	installer='apt-get install -y'
+	programms='zsh ranger nano bat duf tldr btop curl'
+elif command -v pacman; then
+	echo "I'm in ArchLinux"
+	installer='pacman -Sy'
+	programms='zsh ranger nano bat duf tldr btop curl lsd'
+else
+	echo "Unknown system"
+	exit 1
+fi
+
+# Install sudo
+${installer} sudo
+
+# Install some programms
+sudo ${installer} zsh
+sudo ${installer} wget
+sudo ${installer} ranger
+sudo ${installer} nano
+sudo ${installer} bat
+sudo ${installer} duf
+sudo ${installer} tldr
+sudo ${installer} btop
+sudo ${installer} lsd
+ranger --copy-config=all
+
+# Install font for zsh
+# sudo ${installer} fonts-firacode
+
+# Install Oh My Zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# Install PowerLevel10k
+git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh}/themes/powerlevel10k
+
+# Install my theme heist
+wget -P ~/.oh-my-zsh/themes 'https://raw.githubusercontent.com/sanek200000/Linux_sources/main/heist_simple.zsh-theme'
+
+
+# Python code
+python3 -c "
+import os
+
+filename = os.path.expanduser('~/.zshrc')
+my_theme='ZSH_THEME=\"heist_simple\"'
+new_theme='ZSH_THEME=\"powerlevel10k/powerlevel10k\"'
+new_plugins='plugins=( git zsh-syntax-highlighting zsh-autosuggestions )'
+
+with open(filename, 'r') as f:
+    lines = f.readlines()
+
+for i, line in enumerate(lines):
+    if line.startswith('ZSH_THEME='):
+        lines[i] = f'# {line.strip()}\n# {my_theme}\n{new_theme}\n'
+    if line.startswith('plugins=('):
+        lines[i] = f'# {line.strip()}\n{new_plugins}\n'
+
+with open(filename, 'w') as f:
+    f.writelines(lines)
+"
+
+# echo aliaces to ~/.zshrc
+echo "alias ll='lsd -lAF --group-directories-first'" >> ~/.zshrc
+echo "alias h='history 50'" >> ~/.zshrc
+echo "alias ee='nano -c'" >> ~/.zshrc
+echo "alias df='duf'" >> ~/.zshrc
+echo "alias man='tldr'" >> ~/.zshrc
+echo "alias top='btop'" >> ~/.zshrc
+echo "alias rr='ranger'" >> ~/.zshrc
+
+# make ZSH grate again
+chsh -s /usr/bin/zsh
+
+echo 'End script'
+echo 'you can run `p10k configure` to cinfigure your ZSH'
+
+zsh
