@@ -1,0 +1,71 @@
+{
+    "workbench.startupEditor": "none",
+    "editor.smoothScrolling": true,
+    "editor.fontSize": 15,
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "explorer.confirmDelete": false,
+    "editor.comments.insertSpace": false,
+    "liveServer.settings.donotVerifyTags": true,
+    "files.autoSave": "onFocusChange",
+    "editor.formatOnSave": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "explorer.confirmDragAndDrop": false,
+    "python.formatting.provider": "none",
+    "extensions.ignoreRecommendations": true,
+    "workbench.editorAssociations": {
+        "*.sqlite3": "default"
+    },
+    "copy-reference.format": "Custom",
+    "copy-reference.customBlock": "{path}-{ext}",
+    "editor.renderWhitespace": "none",
+    "security.workspace.trust.enabled": false,
+    "editor.contextMenu": true,
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "html.format.contentUnformatted": "",
+    "html.format.templating": true,
+    "html.format.indentInnerHtml": true,
+    "html.format.indentHandlebars": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "tabnine.experimentalAutoImports": true,
+    "workbench.colorTheme": "Default Dark+",
+    "workbench.tree.indent": 20,
+    "files.defaultLanguage": "python",
+    "editor.minimap.enabled": false,
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ],
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        },
+        "Ubuntu-20.04 (WSL)": {
+            "path": "C:\\Windows\\System32\\wsl.exe",
+            "args": [
+                "-d",
+                "Ubuntu-20.04"
+            ]
+        }
+    },
+    "editor.fontLigatures": true,
+    "settingsSync.ignoredSettings": [
+        "editor.fontFamily"
+    ],
+    "editor.fontFamily": "FiraCode Nerd Font",
+}
