@@ -32,30 +32,54 @@ sudo ${installer} duf
 sudo ${installer} tldr
 sudo ${installer} btop
 sudo ${installer} lsd
-ranger --copy-config=all
 
 # Install font for zsh
 # sudo ${installer} fonts-firacode
 
-# Install Oh My Zsh
+# Install Oh My Zsh with plugins
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-# Install PowerLevel10k
-git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh}/themes/powerlevel10k
-
 # Install my theme heist
-wget -P ~/.oh-my-zsh/themes 'https://raw.githubusercontent.com/sanek200000/Linux_sources/main/heist_simple.zsh-theme'
+# wget -P ~/.oh-my-zsh/themes 'https://raw.githubusercontent.com/sanek200000/Linux_sources/main/heist.zsh-theme'
+echo 'PROMPT="╭─%{$fg_bold[yellow]%}%D{%Y-%m-%d %H:%M:%S} %{$fg[white]%}|%{$reset_color%} %{$fg_bold[green]%}%n@%m %{$fg[white]%}|%{$reset_color%} %{$fg_bold[cyan]%}%~%{$reset_color%} %{$fg[white]%}|%{$reset_color%}' > "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
+echo '╰─%{$fg_bold[yellow]%}>%{$reset_color%} "' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"	
+echo 'ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[white]%}[%{$fg[magenta]%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
+echo 'ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[white]%}]%{$reset_color%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
+echo 'ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[white]%} %{$fg[red]%}✗%{$fg[white]%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
+echo 'ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[white]%} %{$fg[green]%}✔%{$fg[white]%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
+
+# echo aliaces to ~/.zshrc
+if command -v lsd; then
+	echo "alias ll='lsd -lAF --group-directories-first'" >> ~/.zshrc
+else
+	echo "alias ll='ls -lAF --group-directories-first'" >> ~/.zshrc
+fi
+if command -v duf; then
+	echo "alias df='duf'" >> ~/.zshrc
+fi
+if command -v tldr; then
+	echo "alias man='tldr'" >> ~/.zshrc
+fi
+if command -v btop; then
+	echo "alias top='btop'" >> ~/.zshrc
+fi
+if command -v ranger; then
+	echo "alias rr='ranger'" >> ~/.zshrc
+	ranger --copy-config=all
+fi
+echo "alias ee='nano -c'" >> ~/.zshrc
+echo "alias h='history 50'" >> ~/.zshrc
 
 
-# Python code
+# Python code: add heist theme, add plugins
 python3 -c "
 import os
 
 filename = os.path.expanduser('~/.zshrc')
-my_theme='ZSH_THEME=\"heist_simple\"'
-new_theme='ZSH_THEME=\"powerlevel10k/powerlevel10k\"'
+my_theme='ZSH_THEME=\"heist\"'
+# new_theme='ZSH_THEME=\"powerlevel10k/powerlevel10k\"'
 new_plugins='plugins=( git zsh-syntax-highlighting zsh-autosuggestions )'
 
 with open(filename, 'r') as f:
@@ -63,7 +87,7 @@ with open(filename, 'r') as f:
 
 for i, line in enumerate(lines):
     if line.startswith('ZSH_THEME='):
-        lines[i] = f'# {line.strip()}\n# {my_theme}\n{new_theme}\n'
+        lines[i] = f'# {line.strip()}\n{my_theme}\n'
     if line.startswith('plugins=('):
         lines[i] = f'# {line.strip()}\n{new_plugins}\n'
 
@@ -71,14 +95,33 @@ with open(filename, 'w') as f:
     f.writelines(lines)
 "
 
-# echo aliaces to ~/.zshrc
-echo "alias ll='lsd -lAF --group-directories-first'" >> ~/.zshrc
-echo "alias h='history 50'" >> ~/.zshrc
-echo "alias ee='nano -c'" >> ~/.zshrc
-echo "alias df='duf'" >> ~/.zshrc
-echo "alias man='tldr'" >> ~/.zshrc
-echo "alias top='btop'" >> ~/.zshrc
-echo "alias rr='ranger'" >> ~/.zshrc
+# Install PowerLevel10k
+# Prompt for user choice on changing the default login shell
+printf '%sDo you want to install powerlevel10k theme? [Y/n]%s '
+read -r opt
+case $opt in
+	y*|Y*|"")
+		git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh}/themes/powerlevel10k
+		python3 -c "
+		import os
+
+		filename = os.path.expanduser('~/.zshrc')
+		p10k_theme='ZSH_THEME=\"powerlevel10k/powerlevel10k\"'
+
+		with open(filename, 'r') as f:
+			lines = f.readlines()
+
+		for i, line in enumerate(lines):
+			if line.startswith('ZSH_THEME='):
+				lines[i] = f'# {line.strip()}\n{p10k_theme}\n'
+
+		with open(filename, 'w') as f:
+			f.writelines(lines)
+		";;
+	n*|N*) echo "Theme change skipped.";
+	*) echo "Invalid choice. Shell change skipped.";
+esac
+
 
 # make ZSH grate again
 chsh -s /usr/bin/zsh
