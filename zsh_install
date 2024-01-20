@@ -96,13 +96,12 @@ with open(filename, 'w') as f:
 "
 
 # Install PowerLevel10k
-printf '%sDo you want to install powerlevel10k theme? [Y/n]%s '
+printf '%sDo you want to install powerlevel10k theme? [y/N]%s '
 read -r opt
 case $opt in
-	y*|Y*|"")
+	y*|Y*)
 		git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh}/themes/powerlevel10k
-		python3 -c "
-import os
+		python3 -c "import os
 
 filename = os.path.expanduser('~/.zshrc')
 p10k_theme='ZSH_THEME=\"powerlevel10k/powerlevel10k\"'
@@ -116,8 +115,9 @@ for i, line in enumerate(lines):
 
 with open(filename, 'w') as f:
 	f.writelines(lines)
-";;
-	n*|N*) echo "Theme change skipped.";;
+"
+	echo 'you can run `p10k configure` to cinfigure your ZSH';;
+	n*|N*|"") echo "Theme change skipped.";;
 	*) echo "Invalid choice. Shell change skipped.";;
 esac
 
@@ -126,6 +126,5 @@ esac
 chsh -s /usr/bin/zsh
 
 echo 'End script'
-echo 'you can run `p10k configure` to cinfigure your ZSH'
 
 zsh
