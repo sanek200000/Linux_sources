@@ -5,15 +5,12 @@
 if command -v pkg; then
 	echo "I'm in FreeBSD"
 	installer='pkg install -y'
-	programms='zsh ranger nano bat duf tldr btop lsd'
 elif command -v apt-get; then
 	echo "I'm in Debian"
 	installer='apt-get install -y'
-	programms='zsh ranger nano bat duf tldr btop curl'
 elif command -v pacman; then
 	echo "I'm in ArchLinux"
 	installer='pacman -Sy'
-	programms='zsh ranger nano bat duf tldr btop curl lsd'
 else
 	echo "Unknown system"
 	exit 1
@@ -103,7 +100,6 @@ import os
 
 filename = os.path.expanduser('~/.zshrc')
 my_theme='ZSH_THEME=\"heist\"'
-# new_theme='ZSH_THEME=\"powerlevel10k/powerlevel10k\"'
 new_plugins='plugins=( git zsh-syntax-highlighting zsh-autosuggestions )'
 
 with open(filename, 'r') as f:
