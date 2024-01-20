@@ -118,8 +118,8 @@ case $opt in
 		with open(filename, 'w') as f:
 			f.writelines(lines)
 		";;
-	n*|N*) echo "Theme change skipped.";
-	*) echo "Invalid choice. Shell change skipped.";
+	n*|N*) echo "Theme change skipped.";;
+	*) echo "Invalid choice. Shell change skipped.";;
 esac
 
 
