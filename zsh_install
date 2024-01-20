@@ -19,19 +19,43 @@ else
 	exit 1
 fi
 
-# Install sudo
-${installer} sudo
-
 # Install some programms
-sudo ${installer} zsh
-sudo ${installer} wget
-sudo ${installer} ranger
-sudo ${installer} nano
-sudo ${installer} bat
-sudo ${installer} duf
-sudo ${installer} tldr
-sudo ${installer} btop
-sudo ${installer} lsd
+if ! command -v sudo; then
+	${installer} sudo
+fi
+if ! command -v zsh; then
+	sudo ${installer} zsh
+fi
+if ! command -v wget; then
+	sudo ${installer} wget
+fi
+if ! command -v curl; then
+	sudo ${installer} curl
+fi
+if ! command -v python3; then
+	sudo ${installer} python
+fi
+if ! command -v ranger; then
+	sudo ${installer} ranger
+fi
+if ! command -v nano; then
+	sudo ${installer} nano
+fi
+if ! command -v bat; then
+	sudo ${installer} bat
+fi
+if ! command -v duf; then
+	sudo ${installer} duf
+fi
+if ! command -v tldr; then
+	sudo ${installer} tldr
+fi
+if ! command -v btop; then
+	sudo ${installer} btop
+fi
+if ! command -v lsd; then
+	sudo ${installer} lsd
+fi
 
 # Install font for zsh
 # sudo ${installer} fonts-firacode
