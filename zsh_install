@@ -96,28 +96,27 @@ with open(filename, 'w') as f:
 "
 
 # Install PowerLevel10k
-# Prompt for user choice on changing the default login shell
 printf '%sDo you want to install powerlevel10k theme? [Y/n]%s '
 read -r opt
 case $opt in
 	y*|Y*|"")
 		git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh}/themes/powerlevel10k
 		python3 -c "
-		import os
+import os
 
-		filename = os.path.expanduser('~/.zshrc')
-		p10k_theme='ZSH_THEME=\"powerlevel10k/powerlevel10k\"'
+filename = os.path.expanduser('~/.zshrc')
+p10k_theme='ZSH_THEME=\"powerlevel10k/powerlevel10k\"'
 
-		with open(filename, 'r') as f:
-			lines = f.readlines()
+with open(filename, 'r') as f:
+	lines = f.readlines()
 
-		for i, line in enumerate(lines):
-			if line.startswith('ZSH_THEME='):
-				lines[i] = f'# {line.strip()}\n{p10k_theme}\n'
+for i, line in enumerate(lines):
+	if line.startswith('ZSH_THEME='):
+		lines[i] = f'# {line.strip()}\n{p10k_theme}\n'
 
-		with open(filename, 'w') as f:
-			f.writelines(lines)
-		";;
+with open(filename, 'w') as f:
+	f.writelines(lines)
+";;
 	n*|N*) echo "Theme change skipped.";;
 	*) echo "Invalid choice. Shell change skipped.";;
 esac
