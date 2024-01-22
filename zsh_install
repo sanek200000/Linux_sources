@@ -20,6 +20,9 @@ fi
 if ! command -v sudo; then
 	${installer} sudo
 fi
+if ! command -v git; then
+	${installer} git
+fi
 if ! command -v zsh; then
 	sudo ${installer} zsh
 fi
