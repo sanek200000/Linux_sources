@@ -151,7 +151,7 @@ esac
 
 
 # make ZSH grate again
-if [ "$OS" == "Linux" ]; then
+if [ "$OS" = "Linux" ]; then
 	chsh -s /usr/bin/zsh
 else
 	chsh -s /usr/local/bin/zsh
