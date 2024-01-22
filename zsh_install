@@ -72,7 +72,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 # Install my theme heist
 # wget -P ~/.oh-my-zsh/themes 'https://raw.githubusercontent.com/sanek200000/Linux_sources/main/heist.zsh-theme'
-echo 'PROMPT="╭─%{$fg_bold[yellow]%}%D{%Y-%m-%d %H:%M:%S} %{$fg[white]%}|%{$reset_color%} %{$fg_bold[green]%}%n@%m %{$fg[white]%}|%{$reset_color%} %{$fg_bold[cyan]%}%~%{$reset_color%} %{$fg[white]%}|%{$reset_color%}' > "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
+echo 'PROMPT="╭─%{$fg_bold[yellow]%}%D{%Y-%m-%d %H:%M:%S} %{$fg[white]%}|%{$reset_color%} %B%(!.%{$fg[red]%}.%{$fg[green]%})%n@%m %{$fg[white]%}|%{$reset_color%} %{$fg_bold[cyan]%}%~%{$reset_color%} %{$fg[white]%}|%{$reset_color%}' > "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
 echo '╰─%{$fg_bold[yellow]%}>%{$reset_color%} "' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"	
 echo 'ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[white]%}[%{$fg[magenta]%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
 echo 'ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[white]%}]%{$reset_color%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
