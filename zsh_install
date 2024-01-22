@@ -37,7 +37,7 @@ if ! command -v python3; then
 	sudo ${installer} python
 fi
 if ! command -v ranger; then
-	if [ "$OS" == "Linux" ]; then
+	if [ "$OS" = "Linux" ]; then
 		sudo ${installer} ranger
 	else
 		sudo ${installer} py39-ranger
