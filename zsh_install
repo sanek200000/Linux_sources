@@ -2,9 +2,12 @@
 #
 # Script for install ZSH
 
+# Get OS type
+OS='Linux'
 if command -v pkg; then
 	echo "I'm in FreeBSD"
 	installer='pkg install -y'
+	OS='FreeBSD'
 elif command -v apt-get; then
 	echo "I'm in Debian"
 	installer='apt-get install -y'
@@ -15,6 +18,7 @@ else
 	echo "Unknown system"
 	exit 1
 fi
+
 
 # Install some programms
 if ! command -v sudo; then
@@ -29,14 +33,15 @@ fi
 if ! command -v wget; then
 	sudo ${installer} wget
 fi
-if ! command -v curl; then
-	sudo ${installer} curl
-fi
 if ! command -v python3; then
 	sudo ${installer} python
 fi
 if ! command -v ranger; then
-	sudo ${installer} ranger
+	if [ "$OS" == "Linux" ]; then
+		sudo ${installer} ranger
+	else
+		sudo ${installer} py39-ranger
+	fi 
 fi
 if ! command -v nano; then
 	sudo ${installer} nano
@@ -118,8 +123,8 @@ with open(filename, 'w') as f:
     f.writelines(lines)
 "
 
-# Install PowerLevel10k
-printf '%sDo you want to install powerlevel10k theme? [y/N]%s '
+# Python code: install PowerLevel10k
+printf '%sDo you want to install PowerLevel10k theme? [y/N]%s '
 read -r opt
 case $opt in
 	y*|Y*)
@@ -146,7 +151,11 @@ esac
 
 
 # make ZSH grate again
-chsh -s /usr/bin/zsh
+if [ "$OS" == "Linux" ]; then
+	chsh -s /usr/bin/zsh
+else
+	chsh -s /usr/local/bin/zsh
+fi
 
 echo 'End script'
 
