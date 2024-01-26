@@ -104,8 +104,8 @@ if command -v ranger; then
 
 	#echo "" >> "$HOME/.config/ranger/rc.conf"
 	#echo "set show_hidden true" >> "$HOME/.config/ranger/rc.conf"
-	sed 's/^set show_hidden false$/set show_hidden true/' $HOME/.config/ranger/rc.conf > tmpfile && mv tmpfile $HOME/.config/ranger/rc.conf
 	sed 's/^mime \^text,  label editor = ${VISUAL:-$EDITOR} -- "\$@"/mime \^text,  label editor = nano -- "\$@"/' $HOME/.config/ranger/rifle.conf > tmpfile && mv tmpfile $HOME/.config/ranger/rifle.conf
+	sed 's/^set show_hidden false$/set show_hidden true/' $HOME/.config/ranger/rc.conf > tmpfile1 && mv tmpfile1 $HOME/.config/ranger/rc.conf
 fi
 echo "alias ee='nano -c'" >> ~/.zshrc
 echo "alias h='history 50'" >> ~/.zshrc
