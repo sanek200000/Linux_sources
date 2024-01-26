@@ -23,6 +23,10 @@ fi
 # Install some programms
 if ! command -v sudo; then
 	${installer} sudo
+	if [ "$OS" = "FreeBSD" ]; then
+		echo "" >> /usr/local/etc/sudoers
+		echo "%wheel ALL=(ALL:ALL) ALL" >> /usr/local/etc/sudoers
+	fi
 fi
 if ! command -v git; then
 	${installer} git
@@ -97,6 +101,11 @@ fi
 if command -v ranger; then
 	echo "alias rr='ranger'" >> ~/.zshrc
 	ranger --copy-config=all
+	echo "" >> "$HOME/.config/ranger/rc.conf"
+	echo "set show_hidden true" >> "$HOME/.config/ranger/rc.conf"
+	echo "" >> "$HOME/.config/ranger/rifle.conf"
+	echo 'mime ^text,  label editor = nano -- "$@"' >> "$HOME/.config/ranger/rifle.conf"
+
 fi
 echo "alias ee='nano -c'" >> ~/.zshrc
 echo "alias h='history 50'" >> ~/.zshrc
