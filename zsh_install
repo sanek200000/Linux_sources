@@ -32,38 +32,38 @@ if ! command -v git; then
 	${installer} git
 fi
 if ! command -v zsh; then
-	sudo ${installer} zsh
+	${installer} zsh
 fi
 if ! command -v wget; then
-	sudo ${installer} wget
+	${installer} wget
 fi
 if ! command -v python3; then
-	sudo ${installer} python
+	${installer} python
 fi
 if ! command -v ranger; then
 	if [ "$OS" = "Linux" ]; then
-		sudo ${installer} ranger
+		${installer} ranger
 	else
-		sudo ${installer} py39-ranger
+		${installer} py39-ranger
 	fi 
 fi
 if ! command -v nano; then
-	sudo ${installer} nano
+	${installer} nano
 fi
 if ! command -v bat; then
-	sudo ${installer} bat
+	${installer} bat
 fi
 if ! command -v duf; then
-	sudo ${installer} duf
+	${installer} duf
 fi
 if ! command -v tldr; then
-	sudo ${installer} tldr
+	${installer} tldr
 fi
 if ! command -v btop; then
-	sudo ${installer} btop
+	${installer} btop
 fi
 if ! command -v lsd; then
-	sudo ${installer} lsd
+	${installer} lsd
 fi
 
 # Install font for zsh
