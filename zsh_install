@@ -101,11 +101,11 @@ fi
 if command -v ranger; then
 	echo "alias rr='ranger'" >> ~/.zshrc
 	ranger --copy-config=all
-	echo "" >> "$HOME/.config/ranger/rc.conf"
-	echo "set show_hidden true" >> "$HOME/.config/ranger/rc.conf"
-	echo "" >> "$HOME/.config/ranger/rifle.conf"
-	echo 'mime ^text,  label editor = nano -- "$@"' >> "$HOME/.config/ranger/rifle.conf"
 
+	#echo "" >> "$HOME/.config/ranger/rc.conf"
+	#echo "set show_hidden true" >> "$HOME/.config/ranger/rc.conf"
+	sed 's/^set show_hidden false$/set show_hidden true/' $HOME/.config/ranger/rc.conf > tmpfile && mv tmpfile $HOME/.config/ranger/rc.conf
+	sed 's/^mime \^text,  label editor = vim -- "\$@"/mime \^text,  label editor = nano -- "\$@"/' $HOME/.config/ranger/rifle.conf > tmpfile && mv tmpfile $HOME/.config/ranger/rifle.conf
 fi
 echo "alias ee='nano -c'" >> ~/.zshrc
 echo "alias h='history 50'" >> ~/.zshrc
