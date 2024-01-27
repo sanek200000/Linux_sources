@@ -74,8 +74,7 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-# Install my theme heist
-# wget -P ~/.oh-my-zsh/themes 'https://raw.githubusercontent.com/sanek200000/Linux_sources/main/heist.zsh-theme'
+# Install my theme "heist"
 echo 'PROMPT="╭─%{$fg_bold[yellow]%}%D{%Y-%m-%d %H:%M:%S} %{$fg[white]%}|%{$reset_color%} %B%(!.%{$fg[red]%}.%{$fg[green]%})%n@%m %{$fg[white]%}|%{$reset_color%} %{$fg_bold[cyan]%}%~%{$reset_color%} %{$fg[white]%}|%{$reset_color%}' > "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
 echo '╰─%{$fg_bold[yellow]%}>%{$reset_color%} "' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"	
 echo 'ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[white]%}[%{$fg[magenta]%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
@@ -102,13 +101,15 @@ if command -v ranger; then
 	echo "alias rr='ranger'" >> ~/.zshrc
 	ranger --copy-config=all
 
-	#echo "" >> "$HOME/.config/ranger/rc.conf"
-	#echo "set show_hidden true" >> "$HOME/.config/ranger/rc.conf"
 	sed 's/^mime \^text,  label editor = ${VISUAL:-$EDITOR} -- "\$@"/mime \^text,  label editor = nano -- "\$@"/' $HOME/.config/ranger/rifle.conf > tmpfile && mv tmpfile $HOME/.config/ranger/rifle.conf
 	sed 's/^set show_hidden false$/set show_hidden true/' $HOME/.config/ranger/rc.conf > tmpfile1 && mv tmpfile1 $HOME/.config/ranger/rc.conf
 fi
 echo "alias ee='nano -c'" >> ~/.zshrc
 echo "alias h='history 50'" >> ~/.zshrc
+echo ""
+echo "# History"
+echo "setopt HIST_IGNORE_ALL_DUPS"
+
 
 
 # Python code: add heist theme, add plugins
