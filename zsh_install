@@ -108,12 +108,12 @@ echo "alias ee='nano -c'" >> ~/.zshrc
 echo "alias h='history -i 50'" >> ~/.zshrc
 echo ""
 echo "# History"
-echo "setopt HIST_EXPIRE_DUPS_FIRST"
-echo "setopt HIST_IGNORE_DUPS"
-echo "setopt HIST_IGNORE_ALL_DUPS"
-echo "setopt HIST_IGNORE_SPACE"
-echo "setopt HIST_FIND_NO_DUPS"
-echo "setopt HIST_SAVE_NO_DUPS"
+echo "setopt HIST_EXPIRE_DUPS_FIRST" >> ~/.zshrc
+echo "setopt HIST_IGNORE_DUPS" >> ~/.zshrc
+echo "setopt HIST_IGNORE_ALL_DUPS" >> ~/.zshrc
+echo "setopt HIST_IGNORE_SPACE" >> ~/.zshrc
+echo "setopt HIST_FIND_NO_DUPS" >> ~/.zshrc
+echo "setopt HIST_SAVE_NO_DUPS" >> ~/.zshrc
 
 
 
