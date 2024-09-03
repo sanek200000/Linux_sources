@@ -105,10 +105,15 @@ if command -v ranger; then
 	sed 's/^set show_hidden false$/set show_hidden true/' $HOME/.config/ranger/rc.conf > tmpfile1 && mv tmpfile1 $HOME/.config/ranger/rc.conf
 fi
 echo "alias ee='nano -c'" >> ~/.zshrc
-echo "alias h='history 50'" >> ~/.zshrc
+echo "alias h='history -i 50'" >> ~/.zshrc
 echo ""
 echo "# History"
+echo "setopt HIST_EXPIRE_DUPS_FIRST"
+echo "setopt HIST_IGNORE_DUPS"
 echo "setopt HIST_IGNORE_ALL_DUPS"
+echo "setopt HIST_IGNORE_SPACE"
+echo "setopt HIST_FIND_NO_DUPS"
+echo "setopt HIST_SAVE_NO_DUPS"
 
 
 
