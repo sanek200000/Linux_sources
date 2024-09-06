@@ -106,6 +106,7 @@ if command -v ranger; then
 fi
 echo "alias ee='nano -c'" >> ~/.zshrc
 echo "alias h='history -i 50'" >> ~/.zshrc
+echo "alias s='sudo'" >> ~/.zshrc
 echo ""
 echo "# History"
 echo "setopt HIST_EXPIRE_DUPS_FIRST" >> ~/.zshrc
