@@ -1,0 +1,1 @@
+oh-my-posh init pwsh --config ~/heist.omp.json | Invoke-Expression
