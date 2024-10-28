@@ -105,9 +105,13 @@ if command -v ranger; then
 	sed 's/^set show_hidden false$/set show_hidden true/' $HOME/.config/ranger/rc.conf > tmpfile1 && mv tmpfile1 $HOME/.config/ranger/rc.conf
 fi
 echo "alias ee='nano -c'" >> ~/.zshrc
-echo "alias h='history -i 50 '" >> ~/.zshrc
+echo "alias h='history '" >> ~/.zshrc
 echo "alias s='sudo '" >> ~/.zshrc
-echo ""
+echo "alias cls='clear '" >> ~/.zshrc
+echo "alias dcu='docker-compose up -d'" >> ~/.zshrc
+echo "alias dcd='docker-compose down'" >> ~/.zshrc
+echo "" >> ~/.zshrc
+echo "" >> ~/.zshrc
 echo "# History"
 echo "setopt HIST_EXPIRE_DUPS_FIRST" >> ~/.zshrc
 echo "setopt HIST_IGNORE_DUPS" >> ~/.zshrc
@@ -115,6 +119,7 @@ echo "setopt HIST_IGNORE_ALL_DUPS" >> ~/.zshrc
 echo "setopt HIST_IGNORE_SPACE" >> ~/.zshrc
 echo "setopt HIST_FIND_NO_DUPS" >> ~/.zshrc
 echo "setopt HIST_SAVE_NO_DUPS" >> ~/.zshrc
+echo "" >> ~/.zshrc
 
 
 
