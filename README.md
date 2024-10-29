@@ -15,3 +15,5 @@ sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/sanek200000/Linux_sou
 ## Замена PuntoSwitcher
 
 Файл **switch_layout** кладем куда-нибудь, делаем исполняемым, назначаем клавишу для срабатывания скрипта.
+
+!
