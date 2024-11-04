@@ -28,6 +28,9 @@ if ! command -v sudo; then
 		echo "%wheel ALL=(ALL:ALL) ALL" >> /usr/local/etc/sudoers
 	fi
 fi
+if ! command -v curl; then
+	${installer} curl
+fi
 if ! command -v git; then
 	${installer} git
 fi
