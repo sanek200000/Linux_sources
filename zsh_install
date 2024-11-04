@@ -75,12 +75,15 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # Install my theme "heist"
-echo 'PROMPT="╭─%{$fg_bold[yellow]%}%D{%Y-%m-%d %H:%M:%S} %{$fg[white]%}|%{$reset_color%} %B%(!.%{$fg[red]%}.%{$fg[green]%})%n@%m %{$fg[white]%}|%{$reset_color%} %{$fg_bold[cyan]%}%~%{$reset_color%} %{$fg[white]%}|%{$reset_color%}' > "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
-echo '╰─%{$fg_bold[yellow]%}>%{$reset_color%} "' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"	
-echo 'ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[white]%}[%{$fg[magenta]%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
-echo 'ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[white]%}]%{$reset_color%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
-echo 'ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[white]%} %{$fg[red]%}✗%{$fg[white]%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
-echo 'ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[white]%} %{$fg[green]%}✔%{$fg[white]%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
+curl -o ~/.oh-my-zsh/themes/heist.zsh-theme https://raw.githubusercontent.com/sanek200000/Linux_sources/refs/heads/main/heist.zsh-theme
+sed -i 's/\r$//' ~/.oh-my-zsh/themes/heist.zsh-theme
+
+#echo 'PROMPT="╭─%{$fg_bold[yellow]%}%D{%Y-%m-%d %H:%M:%S} %{$fg[white]%}|%{$reset_color%} %B%(!.%{$fg[red]%}.%{$fg[green]%})%n@%m %{$fg[white]%}|%{$reset_color%} %{$fg_bold[cyan]%}%~%{$reset_color%} %{$fg[white]%}|%{$reset_color%}' > "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
+#echo '╰─%{$fg_bold[yellow]%}>%{$reset_color%} "' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"	
+#echo 'ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[white]%}[%{$fg[magenta]%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
+#echo 'ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[white]%}]%{$reset_color%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
+#echo 'ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[white]%} %{$fg[red]%}✗%{$fg[white]%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
+#echo 'ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[white]%} %{$fg[green]%}✔%{$fg[white]%}"' >> "$HOME/.oh-my-zsh/themes/heist.zsh-theme"
 
 # echo aliaces to ~/.zshrc
 if command -v lsd; then
