@@ -17,10 +17,7 @@
             "display_host": false
           },
           "background": "",
-          "foreground": "lightBlue",
-          "Text": "",
-          "Duration": 0,
-          "NameLength": 0
+          "foreground": "lightBlue"
         },
         {
           "type": "path",
@@ -31,10 +28,45 @@
             "style": "full"
           },
           "background": "",
-          "foreground": "#FFEE58",
-          "Text": "",
-          "Duration": 0,
-          "NameLength": 0
+          "foreground": "#FFEE58"
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "powerline_symbol": "",
+          "foreground": "magenta",
+          "background": "",
+          "properties": {
+            "display_stash_count": true,
+            "display_upstream_icon": true,
+            "display_status": true,
+            "display_status_detail": true,
+            "branch_icon": "  ",
+            "branch_identical_icon": "≡",
+            "branch_ahead_icon": "↑",
+            "branch_behind_icon": "↓",
+            "branch_gone": "≢",
+            "local_working_icon": "",
+            "local_staged_icon": "",
+            "stash_count_icon": "",
+            "commit_icon": "▷ ",
+            "tag_icon": "▶ ",
+            "rebase_icon": "Ɫ ",
+            "cherry_pick_icon": "✓ ",
+            "merge_icon": "◴ ",
+            "no_commits_icon": "[no commits]",
+            "status_separator_icon": " │",
+            "status_colors_enabled": true,
+            "color_background": true,
+            "local_changes_color": "yellow"
+			}
+		},
+		{
+          "type": "python",
+          "style": "plain",
+          "template": "{{ if .Venv }} .venv({{ .Full }}){{ end }} ",
+          "background": "",
+          "foreground": "cyan"
         }
       ]
     },
@@ -42,7 +74,7 @@
       "type": "prompt",
       "alignment": "right",
       "segments": [
-         {
+        {
           "foreground": "#007ACC",
           "properties": {
             "time_format": "15:04:05"
@@ -62,13 +94,11 @@
           "style": "plain",
           "template": "<{{ if .Root }}green{{ else }}green{{ end }}>\u2514\u2500</>{{ if .Root }}<lightRed>#</>{{ else }}>{{ end }} ",
           "background": "",
-          "foreground": "green",
-          "Text": "",
-          "Duration": 0,
-          "NameLength": 0
+          "foreground": "green"
         }
       ],
       "newline": true
     }
   ]
 }
+
