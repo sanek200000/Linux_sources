@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions && \
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting && \
+wget -O ~/.oh-my-zsh/themes/heist.zsh-theme https://raw.githubusercontent.com/sanek200000/Linux_sources/refs/heads/main/heist.zsh-theme && \
+wget -O ~/.zshrc https://raw.githubusercontent.com/sanek200000/Linux_sources/refs/heads/main/.zshrc && \
+find ~/ -type f -exec sed -i 's/\r$//' {} +
