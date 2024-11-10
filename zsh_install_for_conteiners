@@ -1,8 +1,9 @@
 #!/bin/sh
 #
-
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/plugins/zsh-autosuggestions && \
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting && \
+touch ~/.zshrc && \
 wget -O ~/.zshrc https://raw.githubusercontent.com/sanek200000/Linux_sources/refs/heads/main/.zshrc_for_containers && \
 touch ~/.oh-my-zsh/themes/heist.zsh-theme && \
 wget -O ~/.oh-my-zsh/themes/heist.zsh-theme https://raw.githubusercontent.com/sanek200000/Linux_sources/refs/heads/main/heist.zsh-theme && \
