@@ -14,6 +14,9 @@ elif command -v apt-get; then
 elif command -v pacman; then
 	echo "I'm in ArchLinux"
 	installer='pacman -Sy'
+elif command -v apk; then
+	echo "I'm in AlpineLinux"
+	installer='apk add'
 else
 	echo "Unknown system"
 	exit 1
