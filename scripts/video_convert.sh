@@ -42,7 +42,8 @@ for file in *$extension; do
 
     # Выполнение команды конвертации
     echo "Обрабатывается файл: $file"
-    command="ffmpeg -i $file $map_options -vf setpts=${video_speed}*PTS,scale=${scale} -filter:a atempo=${audio_speed} -c:v $codec -crf $quality -preset $speed -c:a $audiocodec -b:a $bitrate $output_file"
+    #command="ffmpeg -i $file $map_options -vf setpts=${video_speed}*PTS,scale=${scale} -filter:a atempo=${audio_speed} -c:v $codec -crf $quality -preset $speed -c:a $audiocodec -b:a $bitrate $output_file"
+    command="ffmpeg $file $map_options -vf setpts=${video_speed}*PTS,scale=${scale} -filter:a atempo=${audio_speed} -c:v $codec -crf $quality -preset $speed -c:a $audiocodec -b:a $bitrate $output_file"
     echo "---------------------------------------------------------------------------------------------------------------------------------------"
     echo "COMMAND: $command"
     echo "---------------------------------------------------------------------------------------------------------------------------------------"
