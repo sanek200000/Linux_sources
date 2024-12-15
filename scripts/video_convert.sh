@@ -24,8 +24,8 @@ speed_factor=1.25 # Фактор изменения скорости (напри
 for file in *$extension; do
   if [ -f "$file" ]; then
     # Убираем расширение из имени файла и сохраняем расширение в переменную
-    filename="${file%$extension}"
     extension=".${file##*.}"
+    filename="${file%$extension}"
 
     # Генерация имени выходного файла
     #output_file="$output_dir/${filename}_converted${extension}"
@@ -43,8 +43,7 @@ for file in *$extension; do
 
     # Выполнение команды конвертации
     echo "Обрабатывается файл: $file"
-    #command="ffmpeg -i $file $map_options -vf setpts=${video_speed}*PTS,scale=${scale} -filter:a atempo=${audio_speed} -c:v $codec -crf $quality -preset $speed -c:a $audiocodec -b:a $bitrate $output_file"
-    command="ffmpeg $file $map_options -vf setpts=${video_speed}*PTS,scale=${scale} -filter:a atempo=${audio_speed} -c:v $codec -crf $quality -preset $speed -c:a $audiocodec -b:a $bitrate $output_file"
+    command="ffmpeg -i $file $map_options -vf setpts=${video_speed}*PTS,scale=${scale} -filter:a atempo=${audio_speed} -c:v $codec -crf $quality -preset $speed -c:a $audiocodec -b:a $bitrate $output_file"
     echo "---------------------------------------------------------------------------------------------------------------------------------------"
     echo "COMMAND: $command"
     echo "---------------------------------------------------------------------------------------------------------------------------------------"
@@ -58,4 +57,4 @@ for file in *$extension; do
   fi
 done
 
-echo "Обработка завершена. Все файлы сохранены в папке '$output_dir'."
+echo "Обработка завершена."
