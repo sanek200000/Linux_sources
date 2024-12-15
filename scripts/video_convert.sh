@@ -5,7 +5,7 @@
 
 # Параметры
 extension=".mkv"    # Расширение файлов для обработки (например, .mkv, .avi)
-scale="1280:720"    # Разрешение (например, 1280:720)
+scale="1280:720"    # Разрешение (например, 1280:720, 960:480)
 codec="libx264"    # использует кодек H.264 для сжатия.(например, libx264)
 quality="23"       # уровень качества (чем выше число, тем ниже качество и меньше размер файла). Обычно диапазон 18–28.
 speed="fast"       # скорость кодирования (можно использовать ultrafast, fast, slow и т.д., медленные пресеты дадут лучшее сжатие).
@@ -27,7 +27,8 @@ for file in *$extension; do
     filename="${file%$extension}"
 
     # Генерация имени выходного файла
-    output_file="$output_dir/${filename}_converted${extension}"
+    #output_file="$output_dir/${filename}_converted${extension}"
+    output_file="${filename}_converted${extension}"
 
     # Построение команды ffmpeg с учетом выбранных дорожек
     map_options="-map $map_video -map $map_audio"
@@ -41,9 +42,11 @@ for file in *$extension; do
 
     # Выполнение команды конвертации
     echo "Обрабатывается файл: $file"
-    #ffmpeg -i input.mkv -map 0:v:0 -map 0:a:1 -vf "setpts=0.8*PTS,scale=1280:720" -filter:a "atempo=1.25" -c:v libx264 -crf 23 -preset fast -c:a aac -b:a 128k output.mkv
-    # ffmpeg -i in.mp4 -map 0:v:0 -map 0:a:3 -vf "setpts=0.8*PTS" -filter:a "atempo=1.25" -c:v libx264 -crf 23 -preset fast -c:a aac -b:a 128k output.mp4
-    ffmpeg -i "$file" $map_options -vf "setpts=${video_speed}*PTS,scale=${scale}" -filter:a "atempo=${audio_speed}" -c:v $codec -crf $quality -preset $speed -c:a $audiocodec -b:a $bitrate "$output_file"
+    command="ffmpeg -i $file $map_options -vf setpts=${video_speed}*PTS,scale=${scale} -filter:a atempo=${audio_speed} -c:v $codec -crf $quality -preset $speed -c:a $audiocodec -b:a $bitrate $output_file"
+    echo "---------------------------------------------------------------------------------------------------------------------------------------"
+    echo "COMMAND: $command"
+    echo "---------------------------------------------------------------------------------------------------------------------------------------"
+    $command
 
     if [ $? -eq 0 ]; then
       echo "Файл успешно конвертирован: $output_file"
