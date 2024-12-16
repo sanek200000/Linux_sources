@@ -44,7 +44,7 @@ for file in *$extension; do
     change_audio="-c:a $audiocodec -b:a $bitrate"
 
     # Executing the conversion command
-    echo "Обрабатывается файл: $file"
+    echo "File is being processed: $file"
     command="ffmpeg -i $file $map_options $change_speed $change_video $change_audio $output_file"
     echo "---------------------------------------------------------------------------------------------------------------------------------------"
     echo "COMMAND: $command"
