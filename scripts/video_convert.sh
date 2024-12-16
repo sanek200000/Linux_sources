@@ -1,60 +1,62 @@
 #!/bin/bash
 
-# Скрипт для конвертации видеофайлов в папке.
-# Задайте параметры ниже.
+# Script for converting video files in a folder.
+# Set the options below.
 
-# Параметры
-# extension=".mkv"    # Расширение файлов для обработки (например, .mkv, .avi)
-scale="960:480"    # Разрешение (например, 1280:720, 960:480)
-codec="libx264"    # использует кодек H.264 для сжатия.(например, libx264)
-quality="23"       # уровень качества (чем выше число, тем ниже качество и меньше размер файла). Обычно диапазон 18–28.
-speed="fast"       # скорость кодирования (можно использовать ultrafast, fast, slow и т.д., медленные пресеты дадут лучшее сжатие).
-audiocodec="aac"   # Аудиокодек (например, aac)
-bitrate="128k"     # Битрейт аудио (например, 128k)
-map_video="0:v:0"  # Видеодорожка, которую оставить (например, 0:v:0)
-map_audio="0:a:0"  # Аудиодорожка, которую оставить (например, 0:a:0)
-map_subs=""        # Субтитры, если нужно (например, 0:s:0; оставьте пустым, чтобы исключить субтитры)
-speed_factor=1.25 # Фактор изменения скорости (например, 2.0 для ускорения в 2 раза)
+# Parametrs
+scale="960:480"     # Resolution (e.g., 1280:720, 960:480)
+codec="libx264"     # Uses the H.264 codec for compression (e.g., libx264).
+quality="23"        # Quality level (the higher the number, the lower the quality and file size). Typically, the range is 18–28.
+speed="fast"        # Encoding speed (options include ultrafast, fast, slow, etc.; slower presets offer better compression).
+audiocodec="aac"    # Audio codec (e.g., aac).
+bitrate="128k"      # Audio bitrate (e.g., 128k).
+map_video="0:v:0"   # Video track to keep (e.g., 0:v:0).
+map_audio="0:a:0"   # Audio track to keep (e.g., 0:a:0).
+map_subs=""         # Subtitles, if needed (e.g., 0:s:0; leave empty to exclude subtitles).
+speed_factor=1.25   # Speed adjustment factor (e.g., 2.0 for 2x speed).
 
-# Создание выходной директории
-#output_dir="converted"
-#mkdir -p "$output_dir"
 
-# Обход всех файлов с заданным расширением в текущей папке
+# Traverse all files with a given extension in the current folder
 for file in *$extension; do
   if [ -f "$file" ]; then
-    # Убираем расширение из имени файла и сохраняем расширение в переменную
+    # Remove the extension from the file name and save the extension to a variable
     extension=".${file##*.}"
     filename="${file%$extension}"
 
-    # Генерация имени выходного файла
-    #output_file="$output_dir/${filename}_converted${extension}"
+    # Generate output file name
     output_file="${filename}_converted${extension}"
 
-    # Построение команды ffmpeg с учетом выбранных дорожек
+    # Building an ffmpeg command based on the selected tracks
     map_options="-map $map_video -map $map_audio"
     if [ -n "$map_subs" ]; then
       map_options+=" -map $map_subs"
     fi
 
-    # Установка фильтров для изменения скорости
+    # Setting filters to change speed
     video_speed=1/$speed_factor
     audio_speed=$speed_factor
+    # Changfe speed video and audio + change SCALE of video
+    change_speed="-vf setpts=${video_speed}*PTS,scale=${scale} -filter:a atempo=${audio_speed}"
 
-    # Выполнение команды конвертации
+    # Convert video with CODEC, QUALITY and SPEED
+    change_video="-c:v $codec -crf $quality -preset $speed"
+    # Convert audio (only stereo) with AUDIOCODEC and BITRATE
+    change_audio="-c:a $audiocodec -b:a $bitrate"
+
+    # Executing the conversion command
     echo "Обрабатывается файл: $file"
-    command="ffmpeg -i $file $map_options -vf setpts=${video_speed}*PTS,scale=${scale} -filter:a atempo=${audio_speed} -c:v $codec -crf $quality -preset $speed -c:a $audiocodec -b:a $bitrate $output_file"
+    command="ffmpeg -i $file $map_options $change_speed $change_video $change_audio $output_file"
     echo "---------------------------------------------------------------------------------------------------------------------------------------"
     echo "COMMAND: $command"
     echo "---------------------------------------------------------------------------------------------------------------------------------------"
     $command
 
     if [ $? -eq 0 ]; then
-      echo "Файл успешно конвертирован: $output_file"
+      echo "The file has been successfully converted.: $output_file"
     else
-      echo "Ошибка при обработке файла: $file"
+      echo "Error processing file: $file"
     fi
   fi
 done
 
-echo "Обработка завершена."
+echo "That's all, guys!"
