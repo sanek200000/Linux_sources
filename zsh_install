@@ -17,6 +17,9 @@ elif command -v pacman; then
 elif command -v apk; then
 	echo "I'm in AlpineLinux"
 	installer='apk add'
+elif command -v opkg; then
+	echo "I'm in OpenWRT"
+	installer='opkg install'
 else
 	echo "Unknown system"
 	exit 1
