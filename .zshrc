@@ -113,6 +113,7 @@ alias cls='clear '
 alias vv='nvim '
 alias cr='cargo run '
 alias cn='cargo new '
+alias ct='cargo test '
 
 alias dcu='docker compose up -d'
 alias dcd='docker compose down'
