@@ -114,6 +114,10 @@ alias h='history '
 alias s='sudo '
 alias cls='clear '
 
+alias pv='eval "$(poetry env activate)"'
+alias pp='poetry run python '
+alias p='python '
+
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
